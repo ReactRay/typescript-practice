@@ -1,10 +1,20 @@
+import axios from 'axios';
 
+type Todo = {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+};
 
-function check(value: string): void {
+const URL = 'https://jsonplaceholder.typicode.com/todos/3';
 
+async function fetchData(url: string): Promise<void> {
+  const res = await axios.get<Todo>(url);
+  const data: Todo = res.data;
 
-  console.log(value)
+  const { id, userId, title } = data
+  console.log(id, userId, title)
 }
 
-
-check(5)
+fetchData(URL);
