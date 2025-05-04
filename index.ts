@@ -9,12 +9,17 @@ type Todo = {
 
 const URL = 'https://jsonplaceholder.typicode.com/todos/3';
 
-async function fetchData(url: string): Promise<void> {
-  const res = await axios.get<Todo>(url);
-  const data: Todo = res.data;
 
-  const { id, userId, title } = data
-  console.log(id, userId, title)
+async function fetchData(url: string): Promise<Todo> {
+
+  const res = await axios.get(url)
+  const data = res.data as Todo
+
+
+  return data
+
 }
 
-fetchData(URL);
+const data = fetchData(URL).then(dat => console.log(dat))
+
+
